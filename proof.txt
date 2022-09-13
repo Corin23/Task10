@@ -1,0 +1,119 @@
+corin@otp-cdobrica-l1:~/Desktop/Tasks/Task10$ docker build -t ubuntu:20.04 .
+
+......
+
+Running hooks in /etc/ca-certificates/update.d...
+done.
+COMMIT ubuntu:20.04
+--> 6a5b9a2ba90
+Successfully tagged localhost/ubuntu:20.04
+6a5b9a2ba90f5a2dae9153ba02f3813a81c9e71011ccf0795dfdeb11ec028d6c
+
+
+corin@otp-cdobrica-l1:~/Desktop/Tasks/Task10$ podman images
+REPOSITORY                TAG         IMAGE ID      CREATED             SIZE
+localhost/ubuntu          20.04       6a5b9a2ba90f  About a minute ago  907 MB
+docker.io/library/ubuntu  focal       a0ce5a295b63  11 days ago         75.2 MB
+
+corin@otp-cdobrica-l1:~/Desktop/Tasks/Task10$ podman ps
+CONTAINER ID  IMAGE                   COMMAND     CREATED        STATUS            PORTS                   NAMES
+19c9e4957f0e  localhost/ubuntu:20.04  bash        8 minutes ago  Up 8 minutes ago  0.0.0.0:8080->8080/tcp  zealous_darwin
+d9d361231c91  localhost/ubuntu:20.04  bash        3 minutes ago  Up 3 minutes ago 
+
+corin@otp-cdobrica-l1:~/Desktop/Tasks/Task10$ podman start -ia zealous_darwin
+
+
+root@19c9e4957f0e:/# ls
+bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@19c9e4957f0e:~# git clone git@github.com:Corin23/Task9.git
+Cloning into 'Task9'...
+remote: Enumerating objects: 25, done.
+remote: Counting objects: 100% (25/25), done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 25 (delta 7), reused 23 (delta 5), pack-reused 0
+Receiving objects: 100% (25/25), 6.86 KiB | 1.71 MiB/s, done.
+Resolving deltas: 100% (7/7), done.
+
+root@19c9e4957f0e:~# cd Task9
+root@19c9e4957f0e:~/Task9# ls
+Makefile  proof.txt  txtproc.c  valgrind-out.txt
+
+
+root@19c9e4957f0e:~/Task9# apt update       
+Hit:1 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:2 http://security.ubuntu.com/ubuntu focal-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+All packages are up to date.
+
+
+root@19c9e4957f0e:~/Task9# apt-get install curl
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  libcurl4
+The following NEW packages will be installed:
+  curl libcurl4
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 396 kB of archives.
+After this operation, 1121 kB of additional disk space will be used.
+Do you want to continue? [Y/n] 
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl4 amd64 7.68.0-1ubuntu2.13 [235 kB]
+Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 curl amd64 7.68.0-1ubuntu2.13 [161 kB]
+Fetched 396 kB in 1s (654 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libcurl4:amd64.
+(Reading database ... 27864 files and directories currently installed.)
+Preparing to unpack .../libcurl4_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking libcurl4:amd64 (7.68.0-1ubuntu2.13) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking curl (7.68.0-1ubuntu2.13) ...
+Setting up libcurl4:amd64 (7.68.0-1ubuntu2.13) ...
+Setting up curl (7.68.0-1ubuntu2.13) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.9) ...
+
+
+root@19c9e4957f0e:~/Task9# apt-get install libcurl4-gnutls-dev
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Suggested packages:
+  libcurl4-doc libgnutls28-dev libidn11-dev libkrb5-dev libldap2-dev librtmp-dev libssh2-1-dev
+The following NEW packages will be installed:
+  libcurl4-gnutls-dev
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 320 kB of archives.
+After this operation, 1530 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl4-gnutls-dev amd64 7.68.0-1ubuntu2.13 [320 kB]
+Fetched 320 kB in 1s (351 kB/s)              
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libcurl4-gnutls-dev:amd64.
+(Reading database ... 27879 files and directories currently installed.)
+Preparing to unpack .../libcurl4-gnutls-dev_7.68.0-1ubuntu2.13_amd64.deb ...
+Unpacking libcurl4-gnutls-dev:amd64 (7.68.0-1ubuntu2.13) ...
+Setting up libcurl4-gnutls-dev:amd64 (7.68.0-1ubuntu2.13) ...
+
+root@19c9e4957f0e:~/Task9# make
+gcc -g -Wall  -o txtproc txtproc.c -lcurl
+
+root@19c9e4957f0e:~/Task9# ./txtproc "abc   def" "a c" 
+55.56
+
+root@19c9e4957f0e:~/Task9# ./txtproc text1.txt "a c"
+50.00 ??
+root@19c9e4957f0e:~/Task9# ./txtproc "abc   def" text2.txt 
+55.56
+root@19c9e4957f0e:~/Task9# ./txtproc text1.txt text2.txt 
+60.00 ??
+
+root@19c9e4957f0e:~/Task9# ./txtproc https://www.gutenberg.org/cache/epub/345/pg345.txt "a"
+-nan
+
+
+
