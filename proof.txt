@@ -9,6 +9,21 @@ COMMIT ubuntu:20.04
 Successfully tagged localhost/ubuntu:20.04
 6a5b9a2ba90f5a2dae9153ba02f3813a81c9e71011ccf0795dfdeb11ec028d6c
 
+corin@otp-cdobrica-l1:~/Desktop/Tasks/Task10$ podman build -t ubuntu:podman .
+STEP 1/4: FROM ubuntu
+STEP 2/4: ARG DEBIAN_FRONTEND=noninteractive
+--> 1a0b23b6eac
+STEP 3/4: ENV TZ=Europe/Bucharest
+--> 6ac504f84d8
+STEP 4/4: RUN apt-get update &&  apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping libsdl1.2-dev xterm
+
+...............
+
+COMMIT ubuntu:podman
+--> cfd8804dec2
+Successfully tagged localhost/ubuntu:podman
+cfd8804dec20e8b3fe7bc5b55be4101587a0878ef7ce71e88a3f57b553a11486
+
 
 corin@otp-cdobrica-l1:~/Desktop/Tasks/Task10$ podman images
 REPOSITORY                TAG         IMAGE ID      CREATED             SIZE
