@@ -119,16 +119,50 @@ gcc -g -Wall  -o txtproc txtproc.c -lcurl
 
 root@19c9e4957f0e:~/Task9# ./txtproc "abc   def" "a c" 
 55.56
-
 root@19c9e4957f0e:~/Task9# ./txtproc text1.txt "a c"
-50.00 ??
-root@19c9e4957f0e:~/Task9# ./txtproc "abc   def" text2.txt 
+50.00
+root@19c9e4957f0e:~/Task9# ./txtproc "abc   def" text2.txt
 55.56
-root@19c9e4957f0e:~/Task9# ./txtproc text1.txt text2.txt 
-60.00 ??
+root@19c9e4957f0e:~/Task9# cat text1.txt
+abc   def
+root@19c9e4957f0e:~/Task9# cat text2.txt
+a c
+root@19c9e4957f0e:~/Task9# ./txtproc https://www.gutenberg.org/cache/epub/345/pg345.txt "a" 
+-nan
+root@19c9e4957f0e:~/Task9# curl https://www.gutenberg.org/cache/epub/345/pg345.txt
+curl: (60) SSL certificate problem: self signed certificate in certificate chain
+More details here: https://curl.haxx.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+root@19c9e4957f0e:~/Task9# openssl verify rootCA.crt
+Can't open rootCA.crt for reading, No such file or directory
+140701095843136:error:02001002:system library:fopen:No such file or directory:../crypto/bio/bss_file.c:69:fopen('rootCA.crt','r')
+140701095843136:error:2006D080:BIO routines:BIO_new_file:no such file:../crypto/bio/bss_file.c:76:
+unable to load certificat
+
+:((
+
+................................
 
 root@19c9e4957f0e:~/Task9# ./txtproc https://www.gutenberg.org/cache/epub/345/pg345.txt "a"
--nan
+5.96
+root@19c9e4957f0e:~/Task9# ./txtproc https://www.gutenberg.org/cache/epub/345/pg345.txt text.txt
+7.76
+root@19c9e4957f0e:~/Task9# cat text.txt
+a
+
+-----------------------------
+
+corin@otp-cdobrica-l1:~/Desktop/Tasks/Task9$ ./txtproc https://www.gutenberg.org/cache/epub/345/pg345.txt  text.txt
+5.96
+corin@otp-cdobrica-l1:~/Desktop/Tasks/Task9$ cat text.txt
+a
+
+?
+
+
 
 
 
